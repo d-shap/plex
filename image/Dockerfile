@@ -36,4 +36,4 @@ RUN         mkdir /plex && \
             mkdir /plex/media && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
-            chown -R $RUN_USER:$RUN_GROUP /wiki
+            chown -R $RUN_USER:$RUN_GROUP /plex
