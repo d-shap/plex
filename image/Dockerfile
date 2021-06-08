@@ -6,7 +6,12 @@ ARG         hostgid=961
 
 ENV         DEBIAN_FRONTEND=noninteractive \
             RUN_USER=plex \
-            RUN_GROUP=plex
+            RUN_GROUP=plex \
+            PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/var/lib/plexmediaserver/Library/Application Support" \
+            PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" \
+            PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6 \
+            PLEX_MEDIA_SERVER_TMPDIR="/tmp" \
+            LD_LIBRARY_PATH="/usr/lib/plexmediaserver"
 
 COPY        . /tmp
 
@@ -22,17 +27,26 @@ RUN         apt-get update && \
                 software-properties-common \
                 vim \
                 wget && \
+            apt-get update && \
+            apt-get install --assume-yes \
+                beignet-opencl-icd \
+                libusb-1.0-0 \
+                ocl-icd-libopencl1 \
+                udev && \
             apt-get clean
 
 # Create user and group
 RUN         groupadd -g $hostgid $RUN_GROUP && \
-            useradd -u $hostuid -g $hostgid -M $RUN_USER
+            useradd -u $hostuid -g $hostgid -M $RUN_USER && \
+            usermod -d /app $RUN_USER
 
 # Configure application folders
-RUN         mkdir /plex && \
+RUN         mkdir /app && \
+            mkdir /plex && \
             mkdir /plex/media && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
+            chown -R $RUN_USER:$RUN_GROUP /app && \
             chown -R $RUN_USER:$RUN_GROUP /plex
 
 # Configure app
@@ -42,5 +56,5 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             apt-get install --assume-yes \
                 plexmediaserver && \
             apt-get clean && \
-            mkdir -p /var/lib/plexmediaserver/Library/Application\ Support && \
-            chown -R $RUN_USER:$RUN_GROUP /var/lib/plexmediaserver/Library/Application\ Support
+            mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" && \
+            chown -R $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR"
