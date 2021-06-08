@@ -1,0 +1,11 @@
+#!/bin/bash
+docker run \
+    --rm \
+    --name plex \
+    -d \
+    -v /etc/localtime:/etc/localtime \
+    -v /plex/media:/plex/media \
+    -v /var/log/plex:/plex/logs \
+    -v /var/backups/plex:/plex/backups \
+    -p 8001:8001 \
+        plex
