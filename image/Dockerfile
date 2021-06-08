@@ -9,3 +9,20 @@ ENV         DEBIAN_FRONTEND=noninteractive \
             RUN_GROUP=plex
 
 COPY        . /tmp
+
+# Install common packages and configure environment
+RUN         echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/apt/sources.list.d/plex.list && \
+            apt-get update && \
+            apt-get install --assume-yes \
+                apt-utils \
+                build-essential \
+                cron \
+                net-tools \
+                procps \
+                software-properties-common \
+                vim \
+                wget && \
+            apt-get update && \
+            apt-get install --assume-yes \
+                curl && \
+            apt-get clean
