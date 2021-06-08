@@ -30,3 +30,10 @@ RUN         echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/ap
 # Create user and group
 RUN         groupadd -g $hostgid $RUN_GROUP && \
             useradd -u $hostuid -g $hostgid -M $RUN_USER
+
+# Configure application folders
+RUN         mkdir /plex && \
+            mkdir /plex/media && \
+            mkdir /plex/logs && \
+            mkdir /plex/backups && \
+            chown -R $RUN_USER:$RUN_GROUP /wiki
