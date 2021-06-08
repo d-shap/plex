@@ -42,6 +42,9 @@ RUN         groupadd -g $hostgid $RUN_GROUP && \
 # Configure application folders
 RUN         mkdir /plex && \
             mkdir /plex/config && \
+            mkdir /plex/config/Codecs && \
+            mkdir /plex/config/Plug-in\ Support && \
+            mkdir /plex/config/Plug-ins && \
             mkdir /plex/media && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
