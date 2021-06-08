@@ -6,6 +6,10 @@ docker run \
     -v /etc/localtime:/etc/localtime \
     -v /plex/media/movies:/plex/media/movies \
     -v /plex/media/series:/plex/media/series \
+    -v /plex/config/codecs:/plex/media/Codecs \
+    -v /plex/config/plug-in-support:/plex/media/Plug-in\ Support \
+    -v /plex/config/plug-ins:/plex/media/Plug-ins \
+    -v /plex/config/preferences.xml:/plex/media/Preferences.xml \
     -v /var/log/plex:/plex/logs \
     -v /var/backups/plex:/plex/backups \
     -p 32400:32400 \
