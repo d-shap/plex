@@ -12,7 +12,7 @@ This user owns plex process and owns plex files.
     sudo groupadd -g 961 plex
     ```
     ```
-    useradd -u 962 -g 961 -M plex
+    useradd -u 961 -g 961 -M plex
     ```
 3. Proceed to configuration.
 
