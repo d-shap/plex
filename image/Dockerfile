@@ -16,6 +16,7 @@ RUN         apt-get update && \
                 apt-utils \
                 build-essential \
                 cron \
+                curl \
                 net-tools \
                 procps \
                 software-properties-common \
@@ -37,7 +38,7 @@ RUN         mkdir /plex && \
 # Configure app
 RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add - && \
             echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/apt/sources.list.d/plex.list && \
-            sudo apt update && \
+            apt-get update && \
             apt-get install --assume-yes \
                 plexmediaserver && \
             apt-get clean
