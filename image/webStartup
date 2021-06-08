@@ -1,0 +1,5 @@
+#!/bin/bash
+LC_ALL=en_US.UTF-8
+LANG=en_US.UTF-8
+startServerCmd="/usr/lib/plexmediaserver/Plex Media Server"
+"$startServerCmd"
