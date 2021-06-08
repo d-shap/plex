@@ -26,3 +26,7 @@ RUN         echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/ap
             apt-get install --assume-yes \
                 curl && \
             apt-get clean
+
+# Create user and group
+RUN         groupadd -g $hostgid $RUN_GROUP && \
+            useradd -u $hostuid -g $hostgid -M $RUN_USER
