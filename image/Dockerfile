@@ -37,17 +37,15 @@ RUN         apt-get update && \
 
 # Create user and group
 RUN         groupadd -g $hostgid $RUN_GROUP && \
-            useradd -u $hostuid -g $hostgid -M $RUN_USER && \
-            usermod -d /app $RUN_USER
+            useradd -u $hostuid -g $hostgid -M $RUN_USER
 
 # Configure application folders
-RUN         mkdir /app && \
-            mkdir /plex && \
+RUN         mkdir /plex && \
+            mkdir /plex/config && \
             mkdir /plex/media && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
-            chown -R $RUN_USER:$RUN_GROUP /app && \
-            chown -R $RUN_USER:$RUN_GROUP /plex
+            chown -R $RUN_USER:$RUN_GROUPchown -R $RUN_USER:$RUN_GROUP /plex
 
 # Configure app
 RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add - && \
