@@ -41,4 +41,6 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             apt-get update && \
             apt-get install --assume-yes \
                 plexmediaserver && \
-            apt-get clean
+            apt-get clean && \
+            mkdir -p /var/lib/plexmediaserver/Library/Application\ Support && \
+            chown -R $RUN_USER:$RUN_GROUP /var/lib/plexmediaserver/Library/Application\ Support
