@@ -49,7 +49,7 @@ RUN         mkdir /plex && \
             mkdir /plex/media && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
-            chown -R $RUN_USER:$RUN_GROUPchown -R $RUN_USER:$RUN_GROUP /plex
+            chown -R $RUN_USER:$RUN_GROUP /plex
 
 # Configure app
 RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add - && \
