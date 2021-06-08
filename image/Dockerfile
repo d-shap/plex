@@ -59,11 +59,11 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
                 plexmediaserver && \
             apt-get clean && \
             mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" && \
-            ln-s /plex/config/Codecs "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Codecs" && \
-            ln-s /plex/config/Plug-in\ Support "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plug-in Support" && \
-            ln-s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plug-ins" && \
-            ln-s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Preferences.xml" && \
-            ln-s /plex/logs "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Logs" && \
+            ln -s /plex/config/Codecs "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Codecs" && \
+            ln -s /plex/config/Plug-in\ Support "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plug-in Support" && \
+            ln -s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plug-ins" && \
+            ln -s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Preferences.xml" && \
+            ln -s /plex/logs "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Logs" && \
             chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR"
 
 EXPOSE      32400/tcp \
