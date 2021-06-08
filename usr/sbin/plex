@@ -4,8 +4,18 @@ docker run \
     --name plex \
     -d \
     -v /etc/localtime:/etc/localtime \
-    -v /plex/media:/plex/media \
+    -v /plex/media/movies:/plex/media/movies \
+    -v /plex/media/series:/plex/media/series \
     -v /var/log/plex:/plex/logs \
     -v /var/backups/plex:/plex/backups \
-    -p 8001:8001 \
+    -p 32400:32400 \
+    -p 1900:1900 \
+    -p 3005:3005 \
+    -p 5353:5353 \
+    -p 8324:8324 \
+    -p 32410:32410 \
+    -p 32412:32412 \
+    -p 32413:32413 \
+    -p 32414:32414 \
+    -p 32469:32469 \
         plex
