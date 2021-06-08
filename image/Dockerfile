@@ -11,8 +11,7 @@ ENV         DEBIAN_FRONTEND=noninteractive \
 COPY        . /tmp
 
 # Install common packages and configure environment
-RUN         echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/apt/sources.list.d/plex.list && \
-            apt-get update && \
+RUN         apt-get update && \
             apt-get install --assume-yes \
                 apt-utils \
                 build-essential \
@@ -22,9 +21,6 @@ RUN         echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/ap
                 software-properties-common \
                 vim \
                 wget && \
-            apt-get update && \
-            apt-get install --assume-yes \
-                curl && \
             apt-get clean
 
 # Create user and group
@@ -37,3 +33,11 @@ RUN         mkdir /plex && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
             chown -R $RUN_USER:$RUN_GROUP /plex
+
+# Configure app
+RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add - && \
+            echo "deb https://downloads.plex.tv/repo/deb public main" >> /etc/apt/sources.list.d/plex.list && \
+            sudo apt update && \
+            apt-get install --assume-yes \
+                plexmediaserver && \
+            apt-get clean
