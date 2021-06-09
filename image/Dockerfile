@@ -79,6 +79,15 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             ln -s /plex/logs "$PLEX_MEDIA_SERVER_DATA_DIR/Logs" && \
             chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_CONFIG_DIR"
 
+# Configure helper scripts
+RUN         mv /tmp/containerConfig /plex/scripts && \
+            mv /tmp/containerDummy /plex/scripts && \
+            mv /tmp/containerStartup /plex/scripts && \
+            mv /tmp/containerShutdown /plex/scripts && \
+            mv /tmp/webStartup /plex/scripts && \
+            mv /tmp/webShutdown /plex/scripts && \
+            chmod 755 /plex/scripts/*
+
 EXPOSE      1900/udp \
             3005/tcp \
             5353/udp \
