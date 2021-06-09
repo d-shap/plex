@@ -35,9 +35,14 @@ RUN         apt-get update && \
             apt-get update && \
             apt-get install --assume-yes \
                 beignet-opencl-icd \
+                jq \
                 libusb-1.0-0 \
+                locales \
                 ocl-icd-libopencl1 \
-                udev && \
+                tzdata \
+                udev \
+                uuid-runtime \
+                xmlstarlet && \
             apt-get clean
 
 # Create user and group
