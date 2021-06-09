@@ -1,0 +1,6 @@
+#!/bin/bash
+trap /wiki/scripts/containerShutdown HUP SIGHUP INT SIGINT QUIT SIGQUIT TERM SIGTERM
+
+source /plex/scripts/containerConfig
+$startWebCmd & $startDummyCmd
+eval $waitDummyCmd
