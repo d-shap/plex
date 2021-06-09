@@ -89,6 +89,8 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             mv /tmp/webShutdown /plex/scripts && \
             chmod 755 /plex/scripts/*
 
+USER        $RUN_USER
+
 EXPOSE      1900/udp \
             3005/tcp \
             5353/udp \
@@ -99,3 +101,5 @@ EXPOSE      1900/udp \
             32413/udp \
             32414/udp \
             32469/tcp
+
+ENTRYPOINT  ["/plex/scripts/containerStartup"]
