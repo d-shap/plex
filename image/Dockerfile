@@ -15,7 +15,7 @@ ENV         DEBIAN_FRONTEND=noninteractive \
             PLEX_MEDIA_SERVER_TMPDIR="/tmp" \
             PLEX_MEDIA_SERVER_USER=$RUN_USER \
             PLEX_MEDIA_SERVER_INFO_VENDOR="Docker" \
-            PLEX_MEDIA_SERVER_INFO_DEVICE="Docker Container"
+            PLEX_MEDIA_SERVER_INFO_DEVICE="Docker Container" \
             LD_LIBRARY_PATH="/usr/lib/plexmediaserver"
 
 COPY        . /tmp
