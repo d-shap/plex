@@ -58,6 +58,7 @@ RUN         mkdir /plex && \
             mkdir /plex/config/Plug-ins && \
             touch /plex/config/Preferences.xml && \
             mkdir /plex/media && \
+            mkdir /plex/scripts && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
             chown -R $RUN_USER:$RUN_GROUP /plex
