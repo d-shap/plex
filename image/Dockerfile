@@ -79,11 +79,11 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             ln -s /plex/logs "$PLEX_MEDIA_SERVER_DATA_DIR/Logs" && \
             chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_CONFIG_DIR"
 
-EXPOSE      32400/tcp \
-            1900/udp \
+EXPOSE      1900/udp \
             3005/tcp \
             5353/udp \
             8324/tcp \
+            32400/tcp \
             32410/udp \
             32412/udp \
             32413/udp \
