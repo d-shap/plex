@@ -7,10 +7,15 @@ ARG         hostgid=961
 ENV         DEBIAN_FRONTEND=noninteractive \
             RUN_USER=plex \
             RUN_GROUP=plex \
-            PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/var/lib/plexmediaserver/Library/Application Support" \
+            PLEX_MEDIA_SERVER_CONFIG_DIR="/var/lib/plexmediaserver" \
+            PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="$PLEX_MEDIA_SERVER_CONFIG_DIR/Library/Application Support" \
+            PLEX_MEDIA_SERVER_DATA_DIR="$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plex Media Server" \
             PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" \
             PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6 \
             PLEX_MEDIA_SERVER_TMPDIR="/tmp" \
+            PLEX_MEDIA_SERVER_USER=$RUN_USER \
+            PLEX_MEDIA_SERVER_INFO_VENDOR="Docker" \
+            PLEX_MEDIA_SERVER_INFO_DEVICE="Docker Container"
             LD_LIBRARY_PATH="/usr/lib/plexmediaserver"
 
 COPY        . /tmp
@@ -58,12 +63,14 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             apt-get install --assume-yes \
                 plexmediaserver && \
             apt-get clean && \
+            mkdir -p "$PLEX_MEDIA_SERVER_CONFIG_DIR" && \
             mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" && \
-            ln -s /plex/config/Codecs "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Codecs" && \
-            ln -s /plex/config/Plug-in\ Support "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plug-in Support" && \
-            ln -s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plug-ins" && \
-            ln -s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Preferences.xml" && \
-            ln -s /plex/logs "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Logs" && \
+            mkdir -p "$PLEX_MEDIA_SERVER_DATA_DIR" && \
+            ln -s /plex/config/Codecs "$PLEX_MEDIA_SERVER_DATA_DIR/Codecs" && \
+            ln -s /plex/config/Plug-in\ Support "$PLEX_MEDIA_SERVER_DATA_DIR/Plug-in Support" && \
+            ln -s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_DATA_DIR/Plug-ins" && \
+            ln -s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_DATA_DIR/Preferences.xml" && \
+            ln -s /plex/logs "$PLEX_MEDIA_SERVER_DATA_DIR/Logs" && \
             chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR"
 
 EXPOSE      32400/tcp \
