@@ -38,6 +38,7 @@ RUN         apt-get update && \
                 jq \
                 libusb-1.0-0 \
                 locales \
+                locales-all \
                 ocl-icd-libopencl1 \
                 tzdata \
                 udev \
@@ -76,10 +77,7 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             ln -s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_DATA_DIR/Plug-ins" && \
             ln -s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_DATA_DIR/Preferences.xml" && \
             ln -s /plex/logs "$PLEX_MEDIA_SERVER_DATA_DIR/Logs" && \
-            chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_CONFIG_DIR" && \
-            echo "LC_ALL=en_US.utf8" >> /etc/locale.conf && \
-            echo "LC_CTYPE=en_US.utf8" >> /etc/locale.conf && \
-            echo "LANG=en_US.utf8" >> /etc/locale.conf
+            chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_CONFIG_DIR"
 
 EXPOSE      32400/tcp \
             1900/udp \
