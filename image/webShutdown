@@ -1,0 +1,11 @@
+#!/bin/bash
+PIDFILE="$PLEX_MEDIA_SERVER_DATA_DIR/plexmediaserver.pid"
+if [ -e "$PIDFILE" ];
+then
+    PID=$(cat "$PIDFILE")
+    if [ "$PID" != "" ];
+    then
+        kill -SIGTERM "$PID"
+    fi
+    rm "$PIDFILE"
+fi
