@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$1" != "" ];
+then
+    TEMPFILE="/plex/backups/tmp_$1.tar.gz"
+    FILE="/plex/backups/$1.tar.gz"
+    source /plex/scripts/containerConfig
+
+    $stopWebCmd
+
+    cd /plex
+    tar -czf $TEMPFILE config media
+    rm -rf $FILE
+    mv $TEMPFILE $FILE
+
+    $startWebCmd
+fi
