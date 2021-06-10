@@ -117,5 +117,28 @@ To run container next volumes should be mapped:
     sudo service plex start
     ```
 
+## Management
+### Service management
+```
+sudo service plex (start|stop|status|restart)
+```
+
+### Create backup
+```
+sudo pxutil backup <filename>
+```
+
+Backup file **/var/backups/wiki/&lt;filename&gt;.tar.gz** will be created.
+
+### Restore backup
+```
+sudo pxutil restore <filename>
+```
+
+### Command line (bash)
+```
+sudo pxutil bash
+```
+
 # Donation
 If you find my code useful, you can [bye me a coffee](https://www.paypal.me/dshapovalov)
