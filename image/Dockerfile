@@ -87,6 +87,8 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             mv /tmp/containerShutdown /plex/scripts && \
             mv /tmp/webStartup /plex/scripts && \
             mv /tmp/webShutdown /plex/scripts && \
+            mv /tmp/utilBackup /plex/scripts && \
+            mv /tmp/utilRestore /plex/scripts && \
             chmod 755 /plex/scripts/*
 
 USER        $RUN_USER
