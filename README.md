@@ -128,7 +128,7 @@ sudo service plex (start|stop|status|restart)
 sudo pxutil backup <filename>
 ```
 
-Backup file **/var/backups/wiki/&lt;filename&gt;.tar.gz** will be created.
+Backup file **/var/backups/plex/&lt;filename&gt;.tar.gz** will be created.
 
 ### Restore backup
 ```
@@ -138,6 +138,46 @@ sudo pxutil restore <filename>
 ### Command line (bash)
 ```
 sudo pxutil bash
+```
+
+## Apache mod_proxy configuration
+Plex video streaming server can be located with another web applications.
+For example, mercurial, bugzilla, wiki etc can be run as docker containers on the same host.
+In this case apache server can be used to redirect requests to different docker containers.
+
+1. Enable apache mod_proxy:
+    ```
+    sudo a2enmod deflate headers proxy proxy_ajp proxy_balancer proxy_connect proxy_html proxy_http rewrite
+    ```
+2. Configure proxy:
+    ```
+    <VirtualHost *:80>
+        ...
+        ProxyPreserveHost On
+        <Proxy *>
+            Order allow,deny
+            Allow from all
+        </Proxy>
+        ...
+    </VirtualHost>
+    ```
+3. Copy **./etc/apache2/sites-available/plex.conf** to **/etc/apache2/sites-available** folder:
+    ```
+    sudo cp ./etc/apache2/sites-available/plex.conf /etc/apache2/sites-available
+    ```
+4. Enable apache sites:
+    ```
+    sudo a2ensite plex
+    ```
+5. Restart apache service:
+    ```
+    sudo service apache2 restart
+    ```
+
+## HOW TO
+### How to create cron job for backups
+```
+sudo crontab -l | { cat; echo "minute hour * * * /usr/bin/pxutil backup <filename>"; echo ""; } | sudo crontab -
 ```
 
 # Donation
