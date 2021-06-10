@@ -4,6 +4,13 @@ Docker image for plex video streaming server.
 Container runs as non-root user.
 This user owns plex process and owns plex files.
 
+To run container next volumes should be mapped:
+* folder for configs
+* folder for metadata database
+* folder for media files
+* logs folder
+* backups folder
+
 ## Installation
 ### Installation from docker image
 1. Pull docker image.
