@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$1" != "" ];
+then
+    FILE="/plex/backups/$1.tar.gz"
+    source /plex/scripts/containerConfig
+
+    if [ -e "$FILE" ];
+    then
+        $stopWebCmd
+
+        cd /plex
+        tar -xzf $FILE config media
+
+        $startWebCmd
+    fi
+fi
