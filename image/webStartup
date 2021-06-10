@@ -2,7 +2,5 @@
 PLEX_MEDIA_SERVER_INFO_MODEL=$(uname -m)
 PLEX_MEDIA_SERVER_INFO_PLATFORM_VERSION=$(uname -r)
 
-chown -R $RUN_USER:$RUN_GROUP /plex/media
-
 startServerCmd="/usr/lib/plexmediaserver/Plex Media Server"
 "$startServerCmd"
