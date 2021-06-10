@@ -108,6 +108,14 @@ To run container next volumes should be mapped:
     ```
     sudo chmod a+x /usr/bin/pxutil
     ```
+9. Register service:
+    ```
+    sudo update-rc.d plex defaults
+    ```
+12. Start plex service:
+    ```
+    sudo service plex start
+    ```
 
 # Donation
 If you find my code useful, you can [bye me a coffee](https://www.paypal.me/dshapovalov)
