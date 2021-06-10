@@ -1,4 +1,7 @@
 #!/bin/bash
+export  LC_ALL=en_US.UTF-8
+export  LANG=en_US.UTF-8
+
 trap /plex/scripts/containerShutdown HUP SIGHUP INT SIGINT QUIT SIGQUIT TERM SIGTERM
 
 source /plex/scripts/containerConfig
