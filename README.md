@@ -109,7 +109,7 @@ To run container next volumes should be mapped:
     sudo chown -R plex:plex /plex
     ```
     ```
-    sudo chmod -R 777 /plex/upload
+    sudo chmod 777 /plex/upload
     ```
     ```
     sudo chown plex:plex /var/log/plex
