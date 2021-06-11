@@ -34,6 +34,20 @@ restore() {
     fi
 }
 
+catPreferences() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilCatPreferences
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 bash() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -55,10 +69,13 @@ case $1 in
     restore)
         restore $@
         ;;
+    catPreferences)
+        catPreferences
+        ;;
     bash)
         bash
         ;;
     *)
-        echo "Usage: $0 (backup | restore | bash)"
+        echo "Usage: $0 (backup | restore | catPreferences | bash)"
         ;;
 esac
