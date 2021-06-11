@@ -8,6 +8,7 @@ To run container next volumes should be mapped:
 * folder for configs
 * folder for metadata database
 * folder for media files
+* folder to upload files
 * logs folder
 * backups folder
 
@@ -45,19 +46,22 @@ To run container next volumes should be mapped:
     sudo mkdir /plex
     ```
     ```
-    sudo mkdir /plex/media
-    ```
-    ```
-    sudo mkdir /plex/media/movies
-    ```
-    ```
-    sudo mkdir /plex/media/series
-    ```
-    ```
     sudo mkdir /plex/config
     ```
     ```
+    sudo mkdir /plex/config/cache
+    ```
+    ```
     sudo mkdir /plex/config/codecs
+    ```
+    ```
+    sudo mkdir /plex/config/crash-reports
+    ```
+    ```
+    sudo mkdir /plex/config/media
+    ```
+    ```
+    sudo mkdir /plex/config/metadata
     ```
     ```
     sudo mkdir /plex/config/plug-in-support
@@ -67,6 +71,27 @@ To run container next volumes should be mapped:
     ```
     ```
     sudo touch /plex/config/preferences.xml
+    ```
+    ```
+    sudo mkdir /plex/media
+    ```
+    ```
+    sudo mkdir /plex/media/ad_movies
+    ```
+    ```
+    sudo mkdir /plex/media/ad_series
+    ```
+    ```
+    sudo mkdir /plex/media/ch_movies
+    ```
+    ```
+    sudo mkdir /plex/media/ch_series
+    ```
+    ```
+    sudo mkdir /plex/media/ed_movies
+    ```
+    ```
+    sudo mkdir /plex/media/ed_series
     ```
     ```
     sudo mkdir /plex/upload
