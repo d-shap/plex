@@ -9,7 +9,7 @@ docker run \
     -v /plex/config/codecs:/plex/config/Codecs \
     -v /plex/config/plug-in-support:/plex/config/Plug-in\ Support \
     -v /plex/config/plug-ins:/plex/config/Plug-ins \
-    -v /plex/config/preferences.xml:/plex/config/Preferences.xml \
+    -v /plex/config/preferences.xml:/var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml \
     -v /var/log/plex:/plex/logs \
     -v /var/backups/plex:/plex/backups \
     -p 1900:1900 \
