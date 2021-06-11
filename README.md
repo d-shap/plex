@@ -147,6 +147,10 @@ To run container next volumes should be mapped:
     ```
     sudo service plex start
     ```
+13. Obtain content of the **Preferences.xml**
+    ```
+    sudo pxutil catPreferences
+    ```
 
 ## Management
 ### Service management
