@@ -78,7 +78,11 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             mkdir -p "$PLEX_MEDIA_SERVER_CONFIG_DIR" && \
             mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" && \
             mkdir -p "$PLEX_MEDIA_SERVER_DATA_DIR" && \
+            ln -s /plex/config/Cache "$PLEX_MEDIA_SERVER_DATA_DIR/Cache" && \
             ln -s /plex/config/Codecs "$PLEX_MEDIA_SERVER_DATA_DIR/Codecs" && \
+            ln -s /plex/config/Crash\ Reports "$PLEX_MEDIA_SERVER_DATA_DIR/Crash Reports" && \
+            ln -s /plex/config/Media "$PLEX_MEDIA_SERVER_DATA_DIR/Media" && \
+            ln -s /plex/config/Metadata "$PLEX_MEDIA_SERVER_DATA_DIR/Metadata" && \
             ln -s /plex/config/Plug-in\ Support "$PLEX_MEDIA_SERVER_DATA_DIR/Plug-in Support" && \
             ln -s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_DATA_DIR/Plug-ins" && \
             ln -s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_DATA_DIR/Preferences.xml" && \
