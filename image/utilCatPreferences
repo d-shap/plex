@@ -1,0 +1,2 @@
+#!/bin/bash
+cat "$PLEX_MEDIA_SERVER_DATA_DIR/Preferences.xml"
