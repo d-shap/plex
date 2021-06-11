@@ -68,6 +68,9 @@ To run container next volumes should be mapped:
     ```
     sudo touch /plex/config/preferences.xml
     ```
+    ```
+    sudo mkdir /plex/upload
+    ```
 2. Create folder for logs:
     ```
     sudo mkdir /var/log/plex
@@ -79,6 +82,9 @@ To run container next volumes should be mapped:
 4. Grant permit to all folders:
     ```
     sudo chown -R plex:plex /plex
+    ```
+    ```
+    sudo chmod -R 777 /plex/upload
     ```
     ```
     sudo chown plex:plex /var/log/plex
