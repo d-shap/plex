@@ -51,7 +51,8 @@ RUN         apt-get update && \
 
 # Create user and group
 RUN         groupadd -g $hostgid $RUN_GROUP && \
-            useradd -u $hostuid -g $hostgid -M $RUN_USER
+            useradd -u $hostuid -g $hostgid -M $RUN_USER && \
+            usermod -aG sudo $RUN_USER
 
 # Configure application folders
 RUN         mkdir /plex && \
