@@ -103,6 +103,7 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             mv /tmp/utilBackup /plex/scripts && \
             mv /tmp/utilRestore /plex/scripts && \
             mv /tmp/utilShowPreferences /plex/scripts && \
+            mv /tmp/utilShowTree /plex/scripts && \
             chmod 755 /plex/scripts/*
 
 USER        $RUN_USER
