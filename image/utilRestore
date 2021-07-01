@@ -9,7 +9,7 @@ then
         $stopWebCmd
 
         cd /plex
-        tar -xzf $FILE config media
+        tar -xzf $FILE config
 
         $startWebCmd
     fi

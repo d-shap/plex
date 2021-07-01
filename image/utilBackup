@@ -8,7 +8,7 @@ then
     $stopWebCmd
 
     cd /plex
-    tar -czf $TEMPFILE config media
+    tar -czf $TEMPFILE config
     rm -rf $FILE
     mv $TEMPFILE $FILE
 
