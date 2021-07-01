@@ -48,6 +48,20 @@ showPreferences() {
     fi
 }
 
+showTree() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilShowTree
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 bash() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -72,10 +86,13 @@ case $1 in
     showPreferences)
         showPreferences
         ;;
+    showTree)
+        showTree
+        ;;
     bash)
         bash
         ;;
     *)
-        echo "Usage: $0 (backup | restore | showPreferences | bash)"
+        echo "Usage: $0 (backup | restore | showPreferences | showTree | bash)"
         ;;
 esac
