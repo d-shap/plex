@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "$1" != "" ];
+    FILE_SOURCE="/plex/extensions/$1.bundle"
+    FILE_TARGET="/plex/config/Plug-ins/$1.bundle"
+
+    if [ ! -d "FILE_TARGET" ];
+        cp $FILE_SOURCE $FILE_TARGET
+    fi
+fi
