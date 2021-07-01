@@ -19,8 +19,10 @@ ENV         DEBIAN_FRONTEND=noninteractive \
             LD_LIBRARY_PATH="/usr/lib/plexmediaserver" \
             XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_URL="https://github.com/gboudreau/XBMCnfoMoviesImporter.bundle/archive/master.zip" \
             XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME="XBMCnfoMoviesImporter.bundle" \
+            XBMC_NFO_MOVIE_IMPORTER_FOLDER_NAME="XBMCnfoMoviesImporter.bundle-master" \
             XBMC_NFO_TV_IMPORTER_DOWNLOAD_URL="https://github.com/gboudreau/XBMCnfoTVImporter.bundle/archive/master.zip" \
-            XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME="XBMCnfoTVImporter.bundle"
+            XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME="XBMCnfoTVImporter.bundle" \
+            XBMC_NFO_TV_IMPORTER_FOLDER_NAME="XBMCnfoTVImporter.bundle-master"
 
 COPY        . /tmp
 
@@ -104,9 +106,12 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             wget -O $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME.zip $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_URL && \
             unzip -q $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME.zip && \
             rm -f $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME.zip && \
+            mv $XBMC_NFO_MOVIE_IMPORTER_FOLDER_NAME /plex/extensions/$XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME && \
             wget -O $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip $XBMC_NFO_TV_IMPORTER_DOWNLOAD_URL && \
             unzip -q $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip && \
-            rm -f $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip
+            rm -f $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip && \
+            mv $XBMC_NFO_TV_IMPORTER_FOLDER_NAME /plex/extensions/$XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME && \
+            chown -R $RUN_USER:$RUN_GROUP /plex/extensions
 
 # Configure helper scripts
 RUN         mv /tmp/containerConfig /plex/scripts && \
