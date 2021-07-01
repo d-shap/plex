@@ -16,7 +16,11 @@ ENV         DEBIAN_FRONTEND=noninteractive \
             PLEX_MEDIA_SERVER_USER="plex" \
             PLEX_MEDIA_SERVER_INFO_VENDOR="Docker" \
             PLEX_MEDIA_SERVER_INFO_DEVICE="Docker Container" \
-            LD_LIBRARY_PATH="/usr/lib/plexmediaserver"
+            LD_LIBRARY_PATH="/usr/lib/plexmediaserver" \
+            XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_URL="https://github.com/gboudreau/XBMCnfoMoviesImporter.bundle/archive/master.zip" \
+            XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME="XBMCnfoMoviesImporter.bundle" \
+            XBMC_NFO_TV_IMPORTER_DOWNLOAD_URL="https://github.com/gboudreau/XBMCnfoTVImporter.bundle/archive/master.zip" \
+            XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME="XBMCnfoTVImporter.bundle"
 
 COPY        . /tmp
 
@@ -45,6 +49,7 @@ RUN         apt-get update && \
                 tree \
                 tzdata \
                 udev \
+                unzip \
                 uuid-runtime \
                 xmlstarlet && \
             apt-get clean
@@ -52,7 +57,8 @@ RUN         apt-get update && \
 # Create user and group
 RUN         groupadd -g $hostgid $RUN_GROUP && \
             useradd -u $hostuid -g $hostgid -M $RUN_USER && \
-            usermod -aG sudo $RUN_USER
+            usermod -aG sudo $RUN_USER && \
+            echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Configure application folders
 RUN         mkdir /plex && \
@@ -65,6 +71,7 @@ RUN         mkdir /plex && \
             mkdir /plex/config/Plug-in\ Support && \
             mkdir /plex/config/Plug-ins && \
             touch /plex/config/Preferences.xml && \
+            mkdir /plex/extensions && \
             mkdir /plex/media && \
             mkdir /plex/upload && \
             mkdir /plex/scripts && \
@@ -79,6 +86,7 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             apt-get install --assume-yes \
                 plexmediaserver && \
             apt-get clean && \
+            rm -f /tmp/plexinstaller.log && \
             mkdir -p "$PLEX_MEDIA_SERVER_CONFIG_DIR" && \
             mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" && \
             mkdir -p "$PLEX_MEDIA_SERVER_DATA_DIR" && \
@@ -91,7 +99,14 @@ RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add 
             ln -s /plex/config/Plug-ins "$PLEX_MEDIA_SERVER_DATA_DIR/Plug-ins" && \
             ln -s /plex/config/Preferences.xml "$PLEX_MEDIA_SERVER_DATA_DIR/Preferences.xml" && \
             ln -s /plex/logs "$PLEX_MEDIA_SERVER_DATA_DIR/Logs" && \
-            chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_CONFIG_DIR"
+            chown -R -h $RUN_USER:$RUN_GROUP "$PLEX_MEDIA_SERVER_CONFIG_DIR" && \
+            cd /tmp && \
+            wget -O $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME.zip $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_URL && \
+            unzip -q $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME.zip && \
+            rm -f $XBMC_NFO_MOVIE_IMPORTER_DOWNLOAD_NAME.zip && \
+            wget -O $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip $XBMC_NFO_TV_IMPORTER_DOWNLOAD_URL && \
+            unzip -q $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip && \
+            rm -f $XBMC_NFO_TV_IMPORTER_DOWNLOAD_NAME.zip
 
 # Configure helper scripts
 RUN         mv /tmp/containerConfig /plex/scripts && \
