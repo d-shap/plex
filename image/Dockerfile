@@ -41,6 +41,8 @@ RUN         apt-get update && \
                 locales \
                 locales-all \
                 ocl-icd-libopencl1 \
+                sudo \
+                tree \
                 tzdata \
                 udev \
                 uuid-runtime \
