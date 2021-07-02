@@ -2,10 +2,11 @@
 if [ "$1" != "" ];
 then
     FILE_SOURCE="/plex/extensions/$1.bundle"
-    FILE_TARGET="/plex/config/Plug-ins/$1.bundle"
+    DIR_TARGET="/plex/config/Plug-ins"
+    FILE_TARGET="$DIR_TARGET/$1.bundle"
 
-    if [ ! -d "FILE_TARGET" ];
+    if [ ! -d "$FILE_TARGET" ];
     then
-        cp -r $FILE_SOURCE $FILE_TARGET
+        cp -r $FILE_SOURCE $DIR_TARGET
     fi
 fi
