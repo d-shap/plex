@@ -1,0 +1,21 @@
+#!/bin/bash
+
+setMediaPermit() {
+    sudo chown -R $RUN_USER:$RUN_GROUP /plex/media
+}
+
+setUploadPermit() {
+    sudo chown -R $RUN_USER:$RUN_GROUP /plex/upload
+}
+
+case $1 in
+    media)
+        setMediaPermit
+        ;;
+    upload)
+        setUploadPermit
+        ;;
+    *)
+        echo "Usage: $0 (media | upload)"
+        ;;
+esac
