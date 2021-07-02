@@ -62,6 +62,20 @@ showTree() {
     fi
 }
 
+setPermit() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilSetPermit upload
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 bash() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -89,10 +103,13 @@ case $1 in
     showTree)
         showTree
         ;;
+    setPermit)
+        setPermit
+        ;;
     bash)
         bash
         ;;
     *)
-        echo "Usage: $0 (backup | restore | showPreferences | showTree | bash)"
+        echo "Usage: $0 (backup | restore | showPreferences | showTree | setPermit | bash)"
         ;;
 esac
