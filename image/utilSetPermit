@@ -10,6 +10,7 @@ setUploadPermit() {
     sudo chown -R $RUN_USER:$RUN_GROUP /plex/upload
     find /plex/upload -type d -exec chmod 755 {} \;
     find /plex/upload -type f -exec chmod 644 {} \;
+    chmod 777 /plex/upload
 }
 
 case $1 in
