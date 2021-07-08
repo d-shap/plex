@@ -2,10 +2,14 @@
 
 setMediaPermit() {
     sudo chown -R $RUN_USER:$RUN_GROUP /plex/media
+    find /plex/media -type d -exec chmod 755 {} \;
+    find /plex/media -type f -exec chmod 644 {} \;
 }
 
 setUploadPermit() {
     sudo chown -R $RUN_USER:$RUN_GROUP /plex/upload
+    find /plex/upload -type d -exec chmod 755 {} \;
+    find /plex/upload -type f -exec chmod 644 {} \;
 }
 
 case $1 in
