@@ -128,6 +128,9 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             mv /tmp/utilSetPermit /plex/scripts && \
             mv /tmp/utilShowPreferences /plex/scripts && \
             mv /tmp/utilShowTree /plex/scripts && \
+            ln -s /plex/scripts/utilSetPermit /usr/bin/setPermit && \
+            ln -s /plex/scripts/utilShowPreferences /usr/bin/showPreferences && \
+            ln -s /plex/scripts/utilShowTree /usr/bin/showTree && \
             chmod 755 /plex/scripts/*
 
 USER        $RUN_USER
