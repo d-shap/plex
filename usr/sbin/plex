@@ -2,6 +2,9 @@
 docker run \
     --rm \
     --name plex \
+    --device /dev/net/tun \
+    --cap-add=NET_ADMIN \
+    --security-opt="label=disable" \
     -d \
     -v /etc/localtime:/etc/localtime \
     -v /plex/config/cache:/plex/config/Cache \
