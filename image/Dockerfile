@@ -94,7 +94,7 @@ RUN         apt-get update && \
             mv /tmp/openvpn/* /vpn/config && \
             rm -rf /tmp/openvpn && \
             touch /vpn/credentials && \
-            chown -R $RUN_USER:$RUN_GROUP /vpn/credentials
+            chown $RUN_USER:$RUN_GROUP /vpn/credentials
 
 # Configure app
 RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add - && \
