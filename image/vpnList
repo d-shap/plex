@@ -1,0 +1,2 @@
+#!/bin/bash
+find /vpn/config -name *.ovpn -printf "%f\n" | sed "s/.*\///; s/\.ovpn//" | sort
