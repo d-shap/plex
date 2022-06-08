@@ -151,6 +151,7 @@ To run container next volumes should be mapped:
     ```
     sudo pxutil showPreferences
     ```
+    And write this content to the **/plex/config/preferences.xml** file.
 
 ## Management
 ### Service management
@@ -207,6 +208,27 @@ In this case apache server can be used to redirect requests to different docker 
 5. Restart apache service:
     ```
     sudo service apache2 restart
+    ```
+
+## VPN configuration
+Plex uses external resources (for example, the Movie Database) that can be not accessible without VPN.
+To make them accessible VPN should be used.
+Container contains OpenVPN client, that can be used to turn the VPN connection on.
+
+1. Get the list of available configurations:
+    ```
+    sudo pxutil vpnList
+    ```
+2. Turn the VPN connection on with one of these configurations:
+    ```
+    sudo pxutil vpnStartup <configuration>
+    ```
+
+When there is no need in VPN anymore, turn the VPN connection off.
+
+2. Turn the VPN connection off:
+    ```
+    sudo pxutil vpnShutdown
     ```
 
 ## HOW TO
