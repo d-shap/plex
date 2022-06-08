@@ -65,7 +65,9 @@ RUN         groupadd -g $hostgid $RUN_GROUP && \
             echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Configure application folders
-RUN         mkdir /plex && \
+RUN         mkdir /vpn && \
+            mkdir /vpn/config && \
+            mkdir /plex && \
             mkdir /plex/config && \
             mkdir /plex/config/Cache && \
             mkdir /plex/config/Codecs && \
@@ -81,9 +83,7 @@ RUN         mkdir /plex && \
             mkdir /plex/scripts && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
-            chown -R $RUN_USER:$RUN_GROUP /plex && \
-            mkdir /vpn && \
-            mkdir /vpn/config
+            chown -R $RUN_USER:$RUN_GROUP /plex
 
 # Install OpenVPN
 RUN         apt-get update && \
@@ -133,16 +133,22 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             mv /tmp/containerDummy /plex/scripts && \
             mv /tmp/containerStartup /plex/scripts && \
             mv /tmp/containerShutdown /plex/scripts && \
+            mv /tmp/vpnList /plex/scripts && \
+            ln -s /plex/scripts/vpnList /usr/bin/vpnList && \
+            mv /tmp/vpnStartup /plex/scripts && \
+            ln -s /plex/scripts/vpnStartup /usr/bin/vpnStartup && \
+            mv /tmp/vpnShutdown /plex/scripts && \
+            ln -s /plex/scripts/vpnShutdown /usr/bin/vpnShutdown && \
             mv /tmp/webStartup /plex/scripts && \
             mv /tmp/webShutdown /plex/scripts && \
             mv /tmp/utilBackup /plex/scripts && \
             mv /tmp/utilRestore /plex/scripts && \
             mv /tmp/utilSetExtension /plex/scripts && \
             mv /tmp/utilSetPermit /plex/scripts && \
-            mv /tmp/utilShowPreferences /plex/scripts && \
-            mv /tmp/utilShowTree /plex/scripts && \
             ln -s /plex/scripts/utilSetPermit /usr/bin/setPermit && \
+            mv /tmp/utilShowPreferences /plex/scripts && \
             ln -s /plex/scripts/utilShowPreferences /usr/bin/showPreferences && \
+            mv /tmp/utilShowTree /plex/scripts && \
             ln -s /plex/scripts/utilShowTree /usr/bin/showTree && \
             chmod 755 /plex/scripts/*
 
