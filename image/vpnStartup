@@ -3,5 +3,5 @@ if [ "$1" == "" ];
 then
     echo "Config not specified"
 else
-    openvpn --config /vpn/config/$1.ovpn --daemon
+    sudo openvpn --config /vpn/config/$1.ovpn --daemon
 fi
