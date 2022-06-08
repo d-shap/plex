@@ -81,7 +81,20 @@ RUN         mkdir /plex && \
             mkdir /plex/scripts && \
             mkdir /plex/logs && \
             mkdir /plex/backups && \
-            chown -R $RUN_USER:$RUN_GROUP /plex
+            chown -R $RUN_USER:$RUN_GROUP /plex && \
+            mkdir /vpn && \
+            mkdir /vpn/config
+
+# Install OpenVPN
+RUN         apt-get update && \
+            apt-get install --assume-yes \
+                openresolv \
+                openvpn && \
+            apt-get clean && \
+            mv /tmp/openvpn/* /vpn/config && \
+            rm -rf /tmp/openvpn && \
+            touch /vpn/credentials && \
+            chown -R $RUN_USER:$RUN_GROUP /vpn/credentials
 
 # Configure app
 RUN         curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add - && \
