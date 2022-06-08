@@ -34,6 +34,50 @@ restore() {
     fi
 }
 
+vpnList() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/vpnList
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
+vpnStartup() {
+    arguments=( "$@" )
+
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/vpnStartup "${arguments[1]}"
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
+vpnShutdown() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/vpnShutdown
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 showPreferences() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -97,6 +141,15 @@ case $1 in
     restore)
         restore $@
         ;;
+    vpnList)
+        vpnList
+        ;;
+    vpnStartup)
+        vpnStartup
+        ;;
+    vpnShutdown)
+        vpnShutdown
+        ;;
     showPreferences)
         showPreferences
         ;;
@@ -110,6 +163,6 @@ case $1 in
         bash
         ;;
     *)
-        echo "Usage: $0 (backup | restore | showPreferences | showTree | setPermit | bash)"
+        echo "Usage: $0 (backup | restore | vpnList | vpnStartup | vpnShutdown | showPreferences | showTree | setPermit | bash)"
         ;;
 esac
