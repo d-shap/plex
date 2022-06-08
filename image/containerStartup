@@ -1,11 +1,11 @@
 #!/bin/bash
-/plex/scripts/utilSetExtension XBMCnfoMoviesImporter
-/plex/scripts/utilSetExtension XBMCnfoTVImporter
-
 if [ "$VPN_USERNAME" != "" ] && [ "$VPN_PASSWORD" != "" ];
 then
     printf '%s\n' "$VPN_USERNAME" "$VPN_PASSWORD" > /vpn/credentials
 fi
+
+/plex/scripts/utilSetExtension XBMCnfoMoviesImporter
+/plex/scripts/utilSetExtension XBMCnfoTVImporter
 
 trap /plex/scripts/containerShutdown HUP SIGHUP INT SIGINT QUIT SIGQUIT TERM SIGTERM
 
