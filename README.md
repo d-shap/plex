@@ -149,7 +149,7 @@ To run container next volumes should be mapped:
     ```
 13. Obtain content of the **Preferences.xml**
     ```
-    sudo pxutil catPreferences
+    sudo pxutil showPreferences
     ```
 
 ## Management
