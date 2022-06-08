@@ -215,11 +215,14 @@ Plex uses external resources (for example, the Movie Database) that can be not a
 To make them accessible VPN should be used.
 Container contains OpenVPN client, that can be used to turn the VPN connection on.
 
-1. Get the list of available configurations:
+1. Set values for these environment variables in **/usr/sbin/plex** file:
+    * VPN_USERNAME
+    * VPN_PASSWORD
+2. Get the list of available configurations:
     ```
     sudo pxutil vpnList
     ```
-2. Turn the VPN connection on with one of these configurations:
+3. Turn the VPN connection on with one of these configurations:
     ```
     sudo pxutil vpnStartup <configuration>
     ```
