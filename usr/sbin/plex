@@ -24,6 +24,8 @@ docker run \
     -v /plex/upload:/plex/upload \
     -v /var/log/plex:/plex/logs \
     -v /var/backups/plex:/plex/backups \
+    -e VPN_USERNAME="username" \
+    -e VPN_PASSWORD="password" \
     -p 1900:1900 \
     -p 3005:3005 \
     -p 5353:5353 \
