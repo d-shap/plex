@@ -145,7 +145,7 @@ case $1 in
         vpnList
         ;;
     vpnStartup)
-        vpnStartup
+        vpnStartup $@
         ;;
     vpnShutdown)
         vpnShutdown
