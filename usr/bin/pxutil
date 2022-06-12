@@ -33,13 +33,15 @@ vpnStartup() {
 }
 
 vpnUpdateRoutes() {
+    arguments=( "$@" )
+
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
     then
         exit 1
     fi
 
-    docker exec "$CID" /plex/scripts/vpnUpdateRoutes
+    docker exec "$CID" /plex/scripts/vpnUpdateRoutes "${arguments[1]}" "${arguments[2]}" "${arguments[3]}"
     if [ $? -ne 0 ];
     then
         exit 2
@@ -170,7 +172,7 @@ case $1 in
         vpnStartup $@
         ;;
     vpnUpdateRoutes)
-        vpnUpdateRoutes
+        vpnUpdateRoutes $@
         ;;
     vpnShutdown)
         vpnShutdown
@@ -201,7 +203,7 @@ case $1 in
         echo "Available commands:"
         echo " * vpnList"
         echo " * vpnStartup <configuration>"
-        echo " * vpnUpdateRoutes"
+        echo " * vpnUpdateRoutes <docker_address> <network_address> <gateway_address>"
         echo " * vpnShutdown"
         echo " * showPreferences"
         echo " * showRoutes"
