@@ -197,6 +197,18 @@ case $1 in
         bash
         ;;
     *)
-        echo "Usage: $0 (backup | restore | vpnList | vpnStartup | vpnUpdateRoutes | vpnShutdown | showPreferences | showRoutes | showTree | setPermit | bash)"
+        echo "Usage: $0 <command>"
+        echo "Available commands:"
+        echo " * backup <filename>"
+        echo " * restore <filename>"
+        echo " * vpnList"
+        echo " * vpnStartup <configuration>"
+        echo " * vpnUpdateRoutes"
+        echo " * vpnShutdown"
+        echo " * showPreferences"
+        echo " * showRoutes"
+        echo " * showTree"
+        echo " * setPermit"
+        echo " * bash"
         ;;
 esac
