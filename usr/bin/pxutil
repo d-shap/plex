@@ -2,38 +2,6 @@
 
 PIDFILE=/var/run/plex.pid
 
-backup() {
-    arguments=( "$@" )
-
-    CID=$(cat "$PIDFILE")
-    if [ "$CID" == "" ];
-    then
-        exit 1
-    fi
-
-    docker exec "$CID" /plex/scripts/utilBackup "${arguments[1]}"
-    if [ $? -ne 0 ];
-    then
-        exit 2
-    fi
-}
-
-restore() {
-    arguments=( "$@" )
-
-    CID=$(cat "$PIDFILE")
-    if [ "$CID" == "" ];
-    then
-        exit 1
-    fi
-
-    docker exec "$CID" /plex/scripts/utilRestore "${arguments[1]}"
-    if [ $? -ne 0 ];
-    then
-        exit 2
-    fi
-}
-
 vpnList() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -148,6 +116,38 @@ setPermit() {
     fi
 }
 
+backup() {
+    arguments=( "$@" )
+
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilBackup "${arguments[1]}"
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
+restore() {
+    arguments=( "$@" )
+
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilRestore "${arguments[1]}"
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 bash() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -163,12 +163,6 @@ bash() {
 }
 
 case $1 in
-    backup)
-        backup $@
-        ;;
-    restore)
-        restore $@
-        ;;
     vpnList)
         vpnList
         ;;
@@ -193,14 +187,18 @@ case $1 in
     setPermit)
         setPermit
         ;;
+    backup)
+        backup $@
+        ;;
+    restore)
+        restore $@
+        ;;
     bash)
         bash
         ;;
     *)
         echo "Usage: $0 <command>"
         echo "Available commands:"
-        echo " * backup <filename>"
-        echo " * restore <filename>"
         echo " * vpnList"
         echo " * vpnStartup <configuration>"
         echo " * vpnUpdateRoutes"
@@ -209,6 +207,8 @@ case $1 in
         echo " * showRoutes"
         echo " * showTree"
         echo " * setPermit"
+        echo " * backup <filename>"
+        echo " * restore <filename>"
         echo " * bash"
         ;;
 esac
