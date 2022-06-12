@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "$1" == "" ] || [ "$2" == "" ] || [ "$3" == "" ];
+then
+    echo "Required IP not specified: Docker Container IP, Network IP, Gateway IP"
+else
+    sudo ip rule add from $1 table 128
+    sudo ip route add table 128 to $2/24 dev eth0
+    sudo ip route add table 128 default via $3
+fi
