@@ -64,6 +64,20 @@ vpnStartup() {
     fi
 }
 
+vpnUpdateRoutes() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/vpnUpdateRoutes
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 vpnShutdown() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -86,6 +100,20 @@ showPreferences() {
     fi
 
     docker exec "$CID" /plex/scripts/utilShowPreferences
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
+showRoutes() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilShowRoutes
     if [ $? -ne 0 ];
     then
         exit 2
@@ -147,11 +175,17 @@ case $1 in
     vpnStartup)
         vpnStartup $@
         ;;
+    vpnUpdateRoutes)
+        vpnUpdateRoutes
+        ;;
     vpnShutdown)
         vpnShutdown
         ;;
     showPreferences)
         showPreferences
+        ;;
+    showRoutes)
+        showRoutes
         ;;
     showTree)
         showTree
@@ -163,6 +197,6 @@ case $1 in
         bash
         ;;
     *)
-        echo "Usage: $0 (backup | restore | vpnList | vpnStartup | vpnShutdown | showPreferences | showTree | setPermit | bash)"
+        echo "Usage: $0 (backup | restore | vpnList | vpnStartup | vpnUpdateRoutes | vpnShutdown | showPreferences | showRoutes | showTree | setPermit | bash)"
         ;;
 esac
