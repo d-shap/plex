@@ -137,6 +137,8 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             ln -s /plex/scripts/vpnList /usr/bin/vpnList && \
             mv /tmp/vpnStartup /plex/scripts && \
             ln -s /plex/scripts/vpnStartup /usr/bin/vpnStartup && \
+            mv /tmp/vpnUpdateRoutes /plex/scripts && \
+            ln -s /plex/scripts/vpnUpdateRoutes /usr/bin/vpnUpdateRoutes && \
             mv /tmp/vpnShutdown /plex/scripts && \
             ln -s /plex/scripts/vpnShutdown /usr/bin/vpnShutdown && \
             mv /tmp/webStartup /plex/scripts && \
@@ -148,6 +150,8 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             ln -s /plex/scripts/utilSetPermit /usr/bin/setPermit && \
             mv /tmp/utilShowPreferences /plex/scripts && \
             ln -s /plex/scripts/utilShowPreferences /usr/bin/showPreferences && \
+            mv /tmp/utilShowRoutes /plex/scripts && \
+            ln -s /plex/scripts/utilShowRoutes /usr/bin/showRoutes && \
             mv /tmp/utilShowTree /plex/scripts && \
             ln -s /plex/scripts/utilShowTree /usr/bin/showTree && \
             chmod 755 /plex/scripts/*
