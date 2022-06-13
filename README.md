@@ -214,6 +214,7 @@ In this case apache server can be used to redirect requests to different docker 
 Plex uses external resources (for example, the Movie Database) that may be not accessible due to some restrictions.
 To make them accessible VPN should be used.
 Container contains OpenVPN client.
+
 Before starting VPN, username and password should be set in this environment variables:
 * VPN_USERNAME
 * VPN_PASSWORD
@@ -234,7 +235,7 @@ In this case IP routes should be changed:
    ```
    sudo pxutil showRoutes
    ```
-2. In the output find 3 IPs
+2. In the output of the previous command find 3 IPs:
     * Docker IP address (for example, 172.17.0.2)
     * Network IP address (for example, 172.17.0.0)
     * Gateway IP address (for example, 172.17.0.1)
