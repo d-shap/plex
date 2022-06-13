@@ -211,14 +211,15 @@ In this case apache server can be used to redirect requests to different docker 
     ```
 
 ## VPN configuration
-Plex uses external resources (for example, the Movie Database) that can be not accessible without VPN.
+Plex uses external resources (for example, the Movie Database) that may be not accessible due to some restrictions.
 To make them accessible VPN should be used.
-Container contains OpenVPN client, that can be used to turn the VPN connection on.
+Container contains OpenVPN client.
+Before starting VPN, username and password should be set in this environment variables:
+* VPN_USERNAME
+* VPN_PASSWORD
 
-1. Set values for these environment variables in **/usr/sbin/plex** file:
-    * VPN_USERNAME
-    * VPN_PASSWORD
-2. Get the list of available configurations:
+To start VPN connection:
+1. Get the list of available configurations:
     ```
     sudo pxutil vpnList
     ```
@@ -227,9 +228,23 @@ Container contains OpenVPN client, that can be used to turn the VPN connection o
     sudo pxutil vpnStartup <configuration>
     ```
 
-When there is no need in VPN anymore, turn the VPN connection off.
+VPN changes container IP, so Plex may become inaccessible from outside of container.
+In this case IP routes should be changed:
+1. Before starting VPN get current routes:
+   ```
+   sudo pxutil showRoutes
+   ```
+2. In the output find 3 IPs
+    * Docker IP address (for example, 172.17.0.2)
+    * Network IP address (for example, 172.17.0.0)
+    * Gateway IP address (for example, 172.17.0.1)
+3. Update IP routes with this values
+   ```
+   sudo pxutil vpnUpdateRoutes <docker_address> <network_address> <gateway_address>
+   ```
 
-2. Turn the VPN connection off:
+To stop VPN connection:
+1. Turn the VPN connection off:
     ```
     sudo pxutil vpnShutdown
     ```
