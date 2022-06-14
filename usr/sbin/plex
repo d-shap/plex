@@ -22,6 +22,7 @@ docker run \
     -v /plex/media/ch_series:/plex/media/ch_series \
     -v /plex/media/ed_movies:/plex/media/ed_movies \
     -v /plex/media/ed_series:/plex/media/ed_series \
+    -v /plex/media/music:/plex/media/music \
     -v /plex/upload:/plex/upload \
     -v /var/log/plex:/plex/logs \
     -v /var/backups/plex:/plex/backups \

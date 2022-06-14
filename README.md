@@ -97,6 +97,9 @@ To run container next volumes should be mapped:
     sudo mkdir /plex/media/ed_series
     ```
     ```
+    sudo mkdir /plex/media/music
+    ```
+    ```
     sudo mkdir /plex/upload
     ```
 2. Create folder for logs:
