@@ -70,6 +70,9 @@ To run container next volumes should be mapped:
     sudo mkdir /plex/config/plug-ins
     ```
     ```
+    sudo mkdir /plex/config/script-data
+    ```
+    ```
     sudo touch /plex/config/preferences.xml
     ```
     ```

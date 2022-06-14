@@ -14,6 +14,7 @@ docker run \
     -v /plex/config/metadata:/plex/config/Metadata \
     -v /plex/config/plug-in-support:/plex/config/Plug-in\ Support \
     -v /plex/config/plug-ins:/plex/config/Plug-ins \
+    -v /plex/config/script-data:/plex/config/Script\ Data \
     -v /plex/config/preferences.xml:/plex/config/Preferences.xml \
     -v /plex/media/ad_movies:/plex/media/ad_movies \
     -v /plex/media/ad_series:/plex/media/ad_series \

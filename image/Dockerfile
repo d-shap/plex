@@ -76,6 +76,7 @@ RUN         mkdir /vpn && \
             mkdir /plex/config/Metadata && \
             mkdir /plex/config/Plug-in\ Support && \
             mkdir /plex/config/Plug-ins && \
+            mkdir /plex/config/Script\ Data && \
             touch /plex/config/Preferences.xml && \
             mkdir /plex/extensions && \
             mkdir /plex/media && \
