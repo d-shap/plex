@@ -13,7 +13,7 @@ checkFileNames() {
                 find $1 -name "$LINE"
             fi
         done < "$FILE_NAME_EXCLUDES"
-    end
+    fi
 }
 
 checkFileContents() {
@@ -26,7 +26,7 @@ checkFileContents() {
                 grep --include=\*.nfo -ril $1 -e "$LINE"
             fi
         done < "$FILE_CONTENT_EXCLUDES"
-    end
+    fi
 }
 
 case $1 in
