@@ -1,24 +1,17 @@
 #!/bin/bash
 
-setMediaPermit() {
-    sudo chown -R $RUN_USER:$RUN_GROUP /plex/media
-    find /plex/media -type d -exec chmod 755 {} \;
-    find /plex/media -type f -exec chmod 644 {} \;
-}
-
-setUploadPermit() {
-    sudo chown -R $RUN_USER:$RUN_GROUP /plex/upload
-    find /plex/upload -type d -exec chmod 755 {} \;
-    find /plex/upload -type f -exec chmod 644 {} \;
-    chmod 777 /plex/upload
+setPermit() {
+    sudo chown -R $RUN_USER:$RUN_GROUP $1
+    find $1 -type d -exec chmod 755 {} \;
+    find $1 -type f -exec chmod 644 {} \;
 }
 
 case $1 in
     media)
-        setMediaPermit
+        setPermit "/plex/media"
         ;;
     upload)
-        setUploadPermit
+        setPermit "/plex/upload"
         ;;
     *)
         echo "Usage: $0 (media | upload)"
