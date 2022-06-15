@@ -6,6 +6,7 @@ FILE_CONTENT_EXCLUDES=/plex/config/Script\ Data/fileContentExcludes
 checkFileNames() {
     if [ -f "$FILE_NAME_EXCLUDES" ];
     then
+        echo "Check for wrong file names"
         while read -r LINE
         do
             if [[ "$LINE" == "" ]];
@@ -25,6 +26,7 @@ checkFileNames() {
 checkFileContents() {
     if [ -f "$FILE_CONTENT_EXCLUDES" ];
     then
+        echo "Check for wrong file contents"
         while read -r LINE
         do
             if [[ "$LINE" == "" ]];
