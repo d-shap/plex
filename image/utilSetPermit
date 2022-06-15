@@ -6,12 +6,17 @@ setPermit() {
     find $1 -type f -exec chmod 644 {} \;
 }
 
+setUploadPermit() {
+    chmod 777 /plex/upload
+}
+
 case $1 in
     media)
         setPermit "/plex/media"
         ;;
     upload)
         setPermit "/plex/upload"
+        setUploadPermit
         ;;
     *)
         echo "Usage: $0 (media | upload)"
