@@ -14,12 +14,25 @@ checkFileNames() {
     end
 }
 
+checkFileContents() {
+    if [ -f "$FILE_CONTENT_EXCLUDES" ];
+    then
+        LINES=$(cat "$FILE_CONTENT_EXCLUDES")
+        for LINE in LINES
+        do
+            grep --include=\*.nfo -ril $1 -e "$LINE"
+        done
+    end
+}
+
 case $1 in
     media)
         checkFileNames "/plex/media"
+        checkFileContents "/plex/media"
         ;;
     upload)
         checkFileNames "/plex/upload"
+        checkFileContents "/plex/upload"
         ;;
     *)
         echo "Usage: $0 (media | upload)"
