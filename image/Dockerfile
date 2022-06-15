@@ -147,6 +147,8 @@ RUN         mv /tmp/containerConfig /plex/scripts && \
             mv /tmp/utilBackup /plex/scripts && \
             mv /tmp/utilRestore /plex/scripts && \
             mv /tmp/utilSetExtension /plex/scripts && \
+            mv /tmp/utilCheckFiles /plex/scripts && \
+            ln -s /plex/scripts/utilCheckFiles /usr/bin/checkFiles && \
             mv /tmp/utilSetPermit /plex/scripts && \
             ln -s /plex/scripts/utilSetPermit /usr/bin/setPermit && \
             mv /tmp/utilShowPreferences /plex/scripts && \
