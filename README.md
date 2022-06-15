@@ -73,6 +73,12 @@ To run container next volumes should be mapped:
     sudo mkdir /plex/config/script-data
     ```
     ```
+    sudo touch /plex/config/script-data/fileContentExcludes
+    ```
+    ```
+    sudo touch /plex/config/script-data/fileNameExcludes
+    ```
+    ```
     sudo touch /plex/config/preferences.xml
     ```
     ```
@@ -158,6 +164,10 @@ To run container next volumes should be mapped:
     sudo pxutil showPreferences
     ```
     And write this content to the **/plex/config/preferences.xml** file.
+14. Restart plex service:
+    ```
+    sudo service plex restart
+    ```
 
 ## Management
 ### Service management
