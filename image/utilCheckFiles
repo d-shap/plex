@@ -1,0 +1,27 @@
+#!/bin/bash
+
+FILE_NAME_EXCLUDES=/plex/config/Plug-in\ Support/fileNameExcludes
+FILE_CONTENT_EXCLUDES=/plex/config/Plug-in\ Support/fileContentExcludes
+
+checkFileNames() {
+    if [ -f "$FILE_NAME_EXCLUDES" ];
+    then
+        LINES=$(cat "$FILE_NAME_EXCLUDES")
+        for LINE in LINES
+        do
+            find $1 -name "$LINE"
+        done
+    end
+}
+
+case $1 in
+    media)
+        checkFileNames "/plex/media"
+        ;;
+    upload)
+        checkFileNames "/plex/upload"
+        ;;
+    *)
+        echo "Usage: $0 (media | upload)"
+        ;;
+esac
