@@ -104,6 +104,20 @@ showTree() {
     fi
 }
 
+checkFiles() {
+    CID=$(cat "$PIDFILE")
+    if [ "$CID" == "" ];
+    then
+        exit 1
+    fi
+
+    docker exec "$CID" /plex/scripts/utilCheckFiles upload
+    if [ $? -ne 0 ];
+    then
+        exit 2
+    fi
+}
+
 setPermit() {
     CID=$(cat "$PIDFILE")
     if [ "$CID" == "" ];
@@ -186,6 +200,9 @@ case $1 in
     showTree)
         showTree
         ;;
+    checkFiles)
+        checkFiles
+        ;;
     setPermit)
         setPermit
         ;;
@@ -208,6 +225,7 @@ case $1 in
         echo " * showPreferences"
         echo " * showRoutes"
         echo " * showTree"
+        echo " * checkFiles"
         echo " * setPermit"
         echo " * backup <filename>"
         echo " * restore <filename>"
