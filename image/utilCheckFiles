@@ -6,22 +6,20 @@ FILE_CONTENT_EXCLUDES=/plex/config/Plug-in\ Support/fileContentExcludes
 checkFileNames() {
     if [ -f "$FILE_NAME_EXCLUDES" ];
     then
-        LINES=$(cat "$FILE_NAME_EXCLUDES")
-        for LINE in LINES
+        while read -r LINE
         do
             find $1 -name "$LINE"
-        done
+        done < "$FILE_NAME_EXCLUDES"
     end
 }
 
 checkFileContents() {
     if [ -f "$FILE_CONTENT_EXCLUDES" ];
     then
-        LINES=$(cat "$FILE_CONTENT_EXCLUDES")
-        for LINE in LINES
+        while read -r LINE
         do
             grep --include=\*.nfo -ril $1 -e "$LINE"
-        done
+        done < "$FILE_CONTENT_EXCLUDES"
     end
 }
 
