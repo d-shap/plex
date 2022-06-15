@@ -8,10 +8,15 @@ checkFileNames() {
     then
         while read -r LINE
         do
-            if [ "$LINE" != "" ] && [ "$LINE" != #* ];
+            if [ "$LINE" == "" ]
             then
-                find $1 -name "$LINE"
+                continue
             fi
+            if [ "$LINE" =~ ^#.* ]
+            then
+                continue
+            fi
+            find $1 -name "$LINE"
         done < "$FILE_NAME_EXCLUDES"
     fi
 }
@@ -21,10 +26,15 @@ checkFileContents() {
     then
         while read -r LINE
         do
-            if [ "$LINE" != "" ] && [ "$LINE" != #* ];
+            if [ "$LINE" == "" ]
             then
-                grep --include=\*.nfo -ril $1 -e "$LINE"
+                continue
             fi
+            if [ "$LINE" =~ ^#.* ]
+            then
+                continue
+            fi
+            grep --include=\*.nfo -ril $1 -e "$LINE"
         done < "$FILE_CONTENT_EXCLUDES"
     fi
 }
