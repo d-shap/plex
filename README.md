@@ -281,6 +281,7 @@ sudo pxutil setPermit
     *.jfif
     *.avi
     *.mkv
+
     # Check wrong symbols in file names
     *–*
     *—*
