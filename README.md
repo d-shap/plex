@@ -267,6 +267,54 @@ To stop VPN connection:
     ```
 
 ## HOW TO
+### How to set permit of uploaded files and folders
+```
+sudo pxutil setPermit
+```
+
+### How to check if uploaded files and folders have valid name and content
+1. Edit file **/plex/config/script-data/fileNameExcludes** and specify wrong file names in grep format.
+    Example:
+    ```
+    # Check wrong file extensions
+    *.png
+    *.jfif
+    *.avi
+    *.mkv
+    # Check wrong symbols in file names
+    *–*
+    *—*
+    *  *
+    *…*
+    *!*
+    *..*
+    *·*
+    *'*
+    *"*
+    *`*
+    *“*
+    ```
+2. Edit file **/plex/config/script-data/fileContentExcludes** and specify wrong char sequences in nfo files.
+    Example:
+    ```
+    # Check wrong symbols in file content
+    –
+    —
+    …
+    "
+    ·
+    `
+    “
+    !?
+    !!
+    ?!
+    ??
+    ```
+3. Run the following command:
+```
+sudo pxutil checkFiles
+```
+
 ### How to create cron job for backups
 ```
 sudo crontab -l | { cat; echo "minute hour * * * /usr/bin/pxutil backup <filename>"; echo ""; } | sudo crontab -
