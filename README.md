@@ -290,7 +290,6 @@ sudo pxutil setPermit
     *!*
     *..*
     *·*
-    *'*
     *"*
     *`*
     *“*
