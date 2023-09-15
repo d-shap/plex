@@ -229,7 +229,7 @@ In this case apache server can be used to redirect requests to different docker 
 ## VPN configuration
 Plex uses external resources (for example, the Movie Database) that may be not accessible due to some restrictions.
 To make them accessible VPN should be used.
-Container contains OpenVPN client.
+Container contains OpenVPN client (VPNBook).
 
 Before starting VPN, username and password should be set in this environment variables:
 * VPN_USERNAME
